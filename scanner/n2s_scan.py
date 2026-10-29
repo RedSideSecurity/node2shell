@@ -262,6 +262,15 @@ def scan(opener, target, timeout, do_probe):
     found, evidence = fingerprint(hdr, cookies, body)
     info["evidence"] = evidence
 
+    # If the target just redirects (and this opener doesn't follow — the hosted
+    # backend doesn't, for SSRF safety), surface where it points so the user can
+    # scan the final URL instead of trusting a bare "NOT DETECTED".
+    if status in (301, 302, 303, 307, 308):
+        m = re.search(r"^location:\s*(\S+)", hdr, re.I | re.M)
+        if m:
+            info["redirect"] = m.group(1)
+            info["evidence"].append(f"redirects to {m.group(1)} — scan that URL directly")
+
     hv = find_version(opener, url, timeout, found)
     if hv:
         path, ver = hv
