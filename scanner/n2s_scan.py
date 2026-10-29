@@ -203,7 +203,9 @@ def fingerprint(hdr, cookies, body):
         ver = (m.group(1) if m.groups() else "") or ""
         if plat not in found or (ver and not found[plat]):
             found[plat] = ver
-        evidence.append(f"{name} via {where}" + (f" ({ver})" if ver else ""))
+        tag = f"{name} via {where}" + (f" ({ver})" if ver else "")
+        if tag not in evidence:            # a tech can match several header rules; show it once
+            evidence.append(tag)
     return found, evidence
 
 
