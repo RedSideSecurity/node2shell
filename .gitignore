@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.csv
+.venv/
+venv/
+_quarantine/
+_refs/
+*.log
+.DS_Store

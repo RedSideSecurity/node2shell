@@ -1,0 +1,16 @@
+node2shell — RedSide Security
+Copyright (c) 2026 RedSide Security. MIT licensed (see LICENSE).
+
+This is an independent, clean-room implementation. No third-party source code
+was copied into this repository.
+
+Prior art and references (concepts only, not code):
+  * CVE-2026-111497 — Node.js / Brotli security advisory and upstream
+    google/brotli fix.
+  * The behavioral "does it decode Brotli request bodies" detection idea
+    (valid Brotli body vs. an unknown Content-Encoding) is a public technique
+    used by several checkers; this project reimplements it from first
+    principles.
+
+The vulnerable/patched Docker lab is built on the official `node` images,
+which carry their own licenses.

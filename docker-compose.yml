@@ -1,0 +1,27 @@
+# node2shell lab - three Node.js targets to exercise every verdict tier.
+#
+#   docker compose up            # vuln (8091), patched (8092), stealth (8093)
+#
+# Then scan them:
+#   python3 scanner/n2s_scan.py -u http://127.0.0.1:8091/api/orders --probe
+# All targets bind to 127.0.0.1 only. Authorized, local testing only.
+
+services:
+  vuln:
+    build:
+      context: ./lab
+      args: { NODE_VERSION: "24.22.0" }
+    ports: ["127.0.0.1:8091:3000"]
+
+  patched:
+    build:
+      context: ./lab
+      args: { NODE_VERSION: "24.22.1" }
+    ports: ["127.0.0.1:8092:3000"]
+
+  stealth:
+    build:
+      context: ./lab
+      args: { NODE_VERSION: "24.22.0" }
+    environment: { HIDE_VERSION: "1" }
+    ports: ["127.0.0.1:8093:3000"]

@@ -1,0 +1,14 @@
+{
+  "name": "node2shell-lab-app",
+  "version": "1.0.0",
+  "description": "Realistic Brotli-decoding API endpoint for the Node2Shell (CVE-2026-111497) lab",
+  "private": true,
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
